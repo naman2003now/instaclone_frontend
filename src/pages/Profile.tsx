@@ -3,6 +3,7 @@ import ProfileInfo from "../componenets/ProfileInfo";
 import { ReactComponent as PostsTabIcon } from "../assets/Profile/ProfilePostsTabIcon.svg";
 import { ReactComponent as TaggedTabIcon } from "../assets/Profile/ProfileTaggedTabIcon.svg";
 import { ReactComponent as SavedTabIcon } from "../assets/Profile/ProfileSavedTabIcon.svg";
+import Post from "../componenets/Post";
 
 const account = {
   posts: 2,
@@ -11,6 +12,8 @@ const account = {
   name: "Naman Agrawal",
   username: "naman2003now",
   bio: "VIT'25\nGeek💻\nCoder👨‍💻\nSpeed Cuber🧩",
+  profileImage:
+    "https://i.picsum.photos/id/907/400/400.jpg?hmac=rW0KD_ETo42hpFolaALqoj4PtxlYfDYIXirAcsuoymQ",
 };
 
 function Tag({
@@ -30,7 +33,7 @@ function Tag({
       }`}
     >
       <Icon />
-      <div className="px-2">{label.toUpperCase()}</div>
+      <div className="px-2 hidden sm:flex">{label.toUpperCase()}</div>
     </button>
   );
 }
@@ -47,6 +50,14 @@ function Profile() {
         <Tag label="Posts" Icon={PostsTabIcon} active />
         <Tag label="Saved" Icon={SavedTabIcon} />
         <Tag label="Tagged" Icon={TaggedTabIcon} />
+      </div>
+      <div className="grid grid-cols-3 gap-1 sm:gap-2 w-full p-0 sm:p-4">
+        <Post />
+        <Post />
+        <Post />
+        <Post />
+        <Post />
+        <Post />
       </div>
     </div>
   );
