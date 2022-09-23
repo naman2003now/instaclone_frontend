@@ -20,5 +20,16 @@ module.exports = {
     project: ["./tsconfig.json"],
   },
   plugins: ["react", "@typescript-eslint", "prettier"],
-  rules: {},
+  rules: {
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "never",
+        groups: [
+          ["builtin", "external"],
+          ["internal", "parent", "sibling", "index"],
+        ],
+      },
+    ],
+  },
 };

@@ -58,6 +58,8 @@ function Profile() {
         <Post />
         <Post />
         <Post />
+        <Post />
+        <Post />
       </div>
     </div>
   );

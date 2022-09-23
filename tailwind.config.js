@@ -8,6 +8,7 @@ module.exports = {
       black: "#181818",
       seperator: "#dbdbdb",
       "light-gray": "#999999",
+      blue: "#0095f6",
     },
   },
   plugins: [],
