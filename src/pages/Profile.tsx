@@ -16,15 +16,13 @@ const account = {
     "https://i.picsum.photos/id/907/400/400.jpg?hmac=rW0KD_ETo42hpFolaALqoj4PtxlYfDYIXirAcsuoymQ",
 };
 
-function Tag({
-  label,
-  active,
-  Icon,
-}: {
+export interface IPostsCatogaryTab {
   label: string;
   Icon: React.FC;
   active?: boolean;
-}) {
+}
+
+function PostsCatogaryTab({ label, active, Icon }: IPostsCatogaryTab) {
   return (
     <button
       type="button"
@@ -38,7 +36,7 @@ function Tag({
   );
 }
 
-Tag.defaultProps = {
+PostsCatogaryTab.defaultProps = {
   active: false,
 };
 
@@ -47,9 +45,9 @@ function Profile() {
     <div className=" max-w-4xl w-full">
       <ProfileInfo account={account} />
       <div className="flex flex-row justify-center border-t border-seperator">
-        <Tag label="Posts" Icon={PostsTabIcon} active />
-        <Tag label="Saved" Icon={SavedTabIcon} />
-        <Tag label="Tagged" Icon={TaggedTabIcon} />
+        <PostsCatogaryTab label="Posts" Icon={PostsTabIcon} active />
+        <PostsCatogaryTab label="Saved" Icon={SavedTabIcon} />
+        <PostsCatogaryTab label="Tagged" Icon={TaggedTabIcon} />
       </div>
       <div className="grid grid-cols-3 gap-1 sm:gap-2 w-full p-0 sm:p-4">
         <Post />
