@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export interface IShortProfile {
   username: string;
   name: string;
-  profileImage: string;
+  profileImage?: string;
 }
 
 export interface INavbarSearchResults {
@@ -17,12 +18,15 @@ export interface INavbarSearchResult {
 
 export function NavbarSearchResult({ shortProfile }: INavbarSearchResult) {
   return (
-    <button
-      type="button"
+    <Link
+      to={`/${shortProfile.username}`}
       className="flex flex-row items-center w-full h-16 px-4 hover:bg-[#f6f6f6]"
     >
       <img
-        src={shortProfile.profileImage}
+        src={
+          shortProfile.profileImage ||
+          "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg"
+        }
         alt={shortProfile.username}
         className="w-14 h-14 rounded-full"
       />
@@ -30,19 +34,17 @@ export function NavbarSearchResult({ shortProfile }: INavbarSearchResult) {
         <p className="text-left">{shortProfile.username}</p>
         <p className="text-left text-sm text-light-gray">{shortProfile.name}</p>
       </div>
-    </button>
+    </Link>
   );
 }
 
 function NavbarSearchResults({ search, visible }: INavbarSearchResults) {
-  if (!visible) return <div />;
+  if (!visible) return <div className="" />;
   return (
-    <div className="flex justify-center fixed top-0 left-0 w-screen h-screen ">
-      <div className="bg-white w-96 h-80 rounded-sm drop-shadow-lg my-14 overflow-auto py-4">
-        {search.map((profile) => (
-          <NavbarSearchResult shortProfile={profile} />
-        ))}
-      </div>
+    <div className="bg-white w-96 h-80 rounded-sm drop-shadow-lg overflow-auto py-4 my-4">
+      {search.map((profile) => (
+        <NavbarSearchResult shortProfile={profile} key={profile.username} />
+      ))}
     </div>
   );
 }

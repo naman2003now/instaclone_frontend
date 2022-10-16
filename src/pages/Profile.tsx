@@ -1,20 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import ProfileInfo from "../componenets/ProfileInfo";
 import { ReactComponent as PostsTabIcon } from "../assets/Profile/ProfilePostsTabIcon.svg";
 import { ReactComponent as TaggedTabIcon } from "../assets/Profile/ProfileTaggedTabIcon.svg";
 import { ReactComponent as SavedTabIcon } from "../assets/Profile/ProfileSavedTabIcon.svg";
 import Post from "../componenets/Post";
-
-const account = {
-  posts: 2,
-  followers: 475,
-  following: 532,
-  name: "Naman Agrawal",
-  username: "naman2003now",
-  bio: "VIT'25\nGeek💻\nCoder👨‍💻\nSpeed Cuber🧩",
-  profileImage:
-    "https://i.picsum.photos/id/907/400/400.jpg?hmac=rW0KD_ETo42hpFolaALqoj4PtxlYfDYIXirAcsuoymQ",
-};
 
 export interface IPostsCatogaryTab {
   label: string;
@@ -41,6 +32,40 @@ PostsCatogaryTab.defaultProps = {
 };
 
 function Profile() {
+  const tempAccount = {
+    posts: 2,
+    followers: 475,
+    following: 532,
+    name: "Naman Agrawal",
+    username: useParams().username || "naman2003now",
+    bio: "VIT'25\nGeek💻\nCoder👨‍💻\nSpeed Cuber🧩",
+    profileImage:
+      "https://i.picsum.photos/id/907/400/400.jpg?hmac=rW0KD_ETo42hpFolaALqoj4PtxlYfDYIXirAcsuoymQ",
+  };
+
+  const [account, setAccount] = useState(tempAccount);
+  const { username } = useParams();
+
+  useEffect(() => {
+    async function getAccount() {
+      const response = await axios.get(
+        `http://localhost:6969/user/data/${username}`,
+      );
+      console.log(response);
+      const { name, bio, profileImage } = response.data;
+      setAccount({
+        posts: 2,
+        followers: 475,
+        following: 532,
+        username: username || "naman2003now",
+        name,
+        bio,
+        profileImage,
+      });
+    }
+    getAccount();
+  }, [username]);
+
   return (
     <div className=" max-w-4xl w-full">
       <ProfileInfo account={account} />

@@ -27,13 +27,21 @@ function ProfileInfo({ account }: IProfileInfo) {
   return (
     <div className="flex flex-col md:flex-row items-center md:items-stretch justify-between md:aspect-[3/1] w-full pb-10 md:py-0">
       <div className="w-2/5 flex mb-2 justify-center items-center p-4 pt-0">
-        <div className="overflow-hidden shadow-inner shadow-black aspect-square w-full md:w-1/2 rounded-full">
-          <img src={account.profileImage} alt="Profile" />
+        <div className="overflow-hidden border border-seperator aspect-square w-full md:w-1/2 rounded-full">
+          <img
+            src={
+              account.profileImage ||
+              "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg"
+            }
+            alt="Profile"
+          />
         </div>
       </div>
       <div className="w-full sm:w-3/5 grid grid-rows-7 md:grid-rows-6">
         <div className="grid grid-rows-2 grid-span-2 md:grid-cols-2 md:grid-span-1 justify-center md:justify-between items-center">
-          <div className="text-4xl font-extralight">{account.username}</div>
+          <div className="text-4xl font-extralight w-64 truncate">
+            {account.username}
+          </div>
           <div className="flex flex-row justify-start items-center">
             <button
               type="button"
